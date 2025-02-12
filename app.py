@@ -23,7 +23,7 @@ warnings.simplefilter(action='ignore', category=UserWarning)
 
 # 🔹 API 키 & 데이터베이스 ID 입력
 NOTION_API_KEY = "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"
-DATABASE_ID = "190c71a8a29e806095e8fbf4a5a3ae0c"
+DATABASE_ID = "198c71a8a29e81e29bb7f2407186adf4"
 
 # 🔹 API 요청 헤더 설정
 headers = {

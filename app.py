@@ -33,7 +33,7 @@ headers = {
 }
 
 # 📌 타이틀 설정
-st.title("호진 알고리즘 대시보드")
+# st.title("호진 알고리즘 대시보드")
 
 @st.cache_data
 def load_data():
@@ -66,25 +66,25 @@ def load_data():
 df = load_data()
 
 # 시각화
-st.subheader("알고리즘별 풀이 개수")
+# st.subheader("알고리즘별 풀이 개수")
 fig, ax = plt.subplots()
 
-st.subheader("1️⃣ 알고리즘별 문제 개수")
+st.subheader("Number of problems per algorithm")
 fig, ax = plt.subplots(figsize=(8, 5))
 sns.countplot(y=df["알고리즘"], order=df["알고리즘"].value_counts().index, palette="coolwarm", ax=ax)
 ax.set_xlabel("Count")
 ax.set_ylabel("Algorithm")
-ax.set_title("Number of problems per algorithm")
+# ax.set_title("Number of problems per algorithm")
 st.pyplot(fig)
 
 # 난이도별 개수 시각화
-st.subheader("2️⃣ 난이도별 문제 개수")
+st.subheader("Number of problems per Level")
 fig, ax = plt.subplots(figsize=(8, 5))
 sns.countplot(x=df["난이도"], palette="viridis", ax=ax)
 ax.set_xlabel("Level")
 ax.set_ylabel("Count")
-ax.set_title("Number of problems per Level")
+# ax.set_title("Number of problems per Level")
 st.pyplot(fig)
 
-st.subheader("📋 데이터 보기")
+st.subheader("Real Data")
 st.dataframe(df)

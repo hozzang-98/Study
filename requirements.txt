@@ -1,0 +1,5 @@
+requests version==2.32.3
+pandas version==2.2.1
+streamlit version==1.42.0
+matplotlib version==3.8.3
+seaborn version==0.13.2

@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import seaborn as sns
 
-
-rc('font', family='AppleGothic')
+rc('font', family='DejaVu Sans')
+# rc('font', family='AppleGothic')
 plt.rcParams['axes.unicode_minus'] = False
 
 

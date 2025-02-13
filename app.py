@@ -69,12 +69,12 @@ df = load_data()
 
 # 시각화
 # st.title("💡 나의 알고리즘 대시보드 💡")
-st.markdown("<h3 style='text-align: center;'>💡 나의 알고리즘 대시보드 💡</h3>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center;'>💡 나의 알고리즘 대시보드 💡</h5>", unsafe_allow_html=True)
 # My Algorithm Dashboard
 # 날짜별 문제 개수 계산
 # st.subheader("Accumulated number by date")
 # st.subheader("📆 날짜별로 쌓이는 문제 풀이 📊")
-st.markdown("### 📆 날짜별로 쌓이는 문제 풀이 📊")
+st.markdown("###### 📆 날짜별로 쌓이는 문제 풀이 📊")
 
 daily_counts = df.groupby('일자').size()
 
@@ -100,7 +100,7 @@ st.markdown("<br>", unsafe_allow_html=True)  # 한 줄 띄우기
 
 # st.subheader("Ratio of problems per algorithm")
 # st.subheader("🖥️ 알고리즘 유형별 문제 비율 🍩")
-st.markdown("### 🖥️ 알고리즘 유형별 문제 비율 🍩")
+st.markdown("###### 🖥️ 알고리즘 유형별 문제 비율 🍩")
 # 알고리즘별 개수 계산
 algo_counts = df["알고리즘"].value_counts()
 colors = cm.Set3(range(len(algo_counts)))
@@ -126,7 +126,7 @@ st.markdown("<br>", unsafe_allow_html=True)  # 한 줄 띄우기
 # 난이도별 개수 시각화
 # st.subheader("Number of problems per Level")
 # st.subheader("🎯 난이도별 문제 개수 분포 🔥🆙")
-st.markdown("### 🎯 난이도별 문제 개수 분포 🔥🆙")
+st.markdown("###### 🎯 난이도별 문제 개수 분포 🔥🆙")
 fig, ax = plt.subplots(figsize=(8, 5))
 sns.countplot(x=df["난이도"], palette="viridis", ax=ax)
 ax.set_xlabel("Level")

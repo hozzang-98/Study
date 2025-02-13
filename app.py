@@ -68,9 +68,11 @@ def load_data():
 df = load_data()
 
 # 시각화
-
+st.title("💡 나의 알고리즘 대시보드 💡")
+# My Algorithm Dashboard
 # 날짜별 문제 개수 계산
-st.subheader("Accumulated number by date")
+# st.subheader("Accumulated number by date")
+st.subheader("📆 날짜별로 쌓이는 문제 풀이 📊”")
 daily_counts = df.groupby('일자').size()
 
 # 누적 합 계산
@@ -92,7 +94,8 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 st.pyplot(fig)
 
-st.subheader("Ratio of problems per algorithm")
+# st.subheader("Ratio of problems per algorithm")
+st.subheader("🖥️ 알고리즘 유형별 문제 비율 🍩")
 # 알고리즘별 개수 계산
 algo_counts = df["알고리즘"].value_counts()
 colors = cm.Set3(range(len(algo_counts)))
@@ -116,7 +119,8 @@ st.pyplot(fig)
 
 
 # 난이도별 개수 시각화
-st.subheader("Number of problems per Level")
+# st.subheader("Number of problems per Level")
+st.subheader("🎯 난이도별 문제 개수 분포 🔥🆙”")
 fig, ax = plt.subplots(figsize=(8, 5))
 sns.countplot(x=df["난이도"], palette="viridis", ax=ax)
 ax.set_xlabel("Level")

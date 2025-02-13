@@ -7,6 +7,7 @@ import pandas as pd
 import streamlit as st
 
 from matplotlib import rc 
+from matplotlib.ticker import MaxNLocator
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import seaborn as sns
@@ -67,7 +68,29 @@ def load_data():
 df = load_data()
 
 # 시각화
-# st.title("알고리즘별 문제 개수 시각화")
+# 날짜별 문제 개수 계산
+daily_counts = df.groupby('일자').size()
+
+# 누적 합 계산
+cumulative_counts = daily_counts.cumsum()
+
+# 꺾은선 그래프 시각화
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(cumulative_counts.index, cumulative_counts.values, marker='o', linestyle='-', color='b')
+ax.xaxis.set_major_locator(MaxNLocator(integer=True, prune='both', nbins=10))  # 'nbins' 값으로 표시할 레이블 수 조정
+
+# 제목 및 레이블 추가
+ax.set_title("Accumulated number by date")
+ax.set_xlabel("date")
+ax.set_ylabel("cumulative_count")
+
+# x축 레이블 회전 (가독성 향상)
+plt.xticks(rotation=45)
+
+# 그래프 표시
+plt.tight_layout()
+st.pyplot(fig)
+plt.show()
 
 # 알고리즘별 개수 계산
 algo_counts = df["알고리즘"].value_counts()
@@ -81,7 +104,7 @@ ax.pie(
     radius = 1.2,
     colors = colors
 )
-# ax.set_title("Ratio of problems per algorithm")
+ax.set_title("Ratio of problems per algorithm")
 
 # ✅ 레이아웃 조정 (중요)
 fig.tight_layout()
@@ -100,5 +123,5 @@ ax.set_ylabel("Count")
 # ax.set_title("Number of problems per Level")
 st.pyplot(fig)
 
-st.subheader("Real Data")
+st.subheader("Data")
 st.dataframe(df)

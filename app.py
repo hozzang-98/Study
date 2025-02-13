@@ -8,6 +8,7 @@ import streamlit as st
 
 from matplotlib import rc 
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 import seaborn as sns
 
 
@@ -66,16 +67,29 @@ def load_data():
 df = load_data()
 
 # 시각화
-# st.subheader("알고리즘별 풀이 개수")
-fig, ax = plt.subplots()
+# st.title("알고리즘별 문제 개수 시각화")
 
-st.subheader("Number of problems per algorithm")
-fig, ax = plt.subplots(figsize=(8, 5))
-sns.countplot(y=df["알고리즘"], order=df["알고리즘"].value_counts().index, palette="coolwarm", ax=ax)
-ax.set_xlabel("Count")
-ax.set_ylabel("Algorithm")
-# ax.set_title("Number of problems per algorithm")
+# 알고리즘별 개수 계산
+algo_counts = df["알고리즘"].value_counts()
+colors = cm.Set3(range(len(algo_counts)))
+# 파이 차트 시각화
+fig, ax = plt.subplots()
+ax.pie(
+    algo_counts, 
+    labels=algo_counts.index, 
+    autopct="%1.1f%%", 
+    radius = 1.2,
+    colors = colors
+)
+# ax.set_title("Ratio of problems per algorithm")
+
+# ✅ 레이아웃 조정 (중요)
+fig.tight_layout()
+
+# Streamlit에 차트 표시
 st.pyplot(fig)
+
+
 
 # 난이도별 개수 시각화
 st.subheader("Number of problems per Level")

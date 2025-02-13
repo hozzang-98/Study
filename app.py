@@ -58,7 +58,7 @@ def load_data():
             "제목": result["properties"]["제목"]["title"][0]["plain_text"],
             "Github": result["properties"]["Github"]["url"],
             "문제 URL": result["properties"]["문제 URL"]["url"],
-            "일자": datetime.fromisoformat(result["created_time"].replace("Z", "+00:00")).date()
+            "일자": pd.to_datetime(result['properties']['생성일']['date']['start'])
         })
 
     df = pd.DataFrame(data_list)
@@ -79,6 +79,7 @@ cumulative_counts = daily_counts.cumsum()
 # 꺾은선 그래프 시각화
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.plot(cumulative_counts.index, cumulative_counts.values, marker='o', linestyle='-', color='b')
+ax.xaxis.set_major_locator(MaxNLocator(integer=True, prune='both', nbins=10))  # 'nbins' 값으로 표시할 레이블 수 조정
 
 # 제목 및 레이블 추가
 ax.set_xlabel("date")

@@ -34,9 +34,6 @@ headers = {
     "Notion-Version": "2022-06-28",
 }
 
-# 📌 타이틀 설정
-# st.title("호진 알고리즘 대시보드")
-
 @st.cache_data
 def load_data():
 
@@ -69,7 +66,12 @@ df = load_data()
 
 # 시각화
 # st.title("💡 나의 알고리즘 대시보드 💡")
-st.markdown("<h5 style='text-align: center;'>💡 나의 알고리즘 대시보드 💡</h5>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <h5 style='text-align: center; margin-top: -20px;'>💡 나의 알고리즘 대시보드 💡</h5>
+    """, 
+    unsafe_allow_html=True
+)
 # My Algorithm Dashboard
 # 날짜별 문제 개수 계산
 # st.subheader("Accumulated number by date")

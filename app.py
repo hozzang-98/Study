@@ -68,7 +68,9 @@ def load_data():
 df = load_data()
 
 # 시각화
+
 # 날짜별 문제 개수 계산
+st.subheader("Accumulated number by date")
 daily_counts = df.groupby('일자').size()
 
 # 누적 합 계산
@@ -77,10 +79,8 @@ cumulative_counts = daily_counts.cumsum()
 # 꺾은선 그래프 시각화
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.plot(cumulative_counts.index, cumulative_counts.values, marker='o', linestyle='-', color='b')
-ax.xaxis.set_major_locator(MaxNLocator(integer=True, prune='both', nbins=10))  # 'nbins' 값으로 표시할 레이블 수 조정
 
 # 제목 및 레이블 추가
-ax.set_title("Accumulated number by date")
 ax.set_xlabel("date")
 ax.set_ylabel("cumulative_count")
 
@@ -90,8 +90,8 @@ plt.xticks(rotation=45)
 # 그래프 표시
 plt.tight_layout()
 st.pyplot(fig)
-plt.show()
 
+st.subheader("Ratio of problems per algorithm")
 # 알고리즘별 개수 계산
 algo_counts = df["알고리즘"].value_counts()
 colors = cm.Set3(range(len(algo_counts)))
@@ -104,7 +104,7 @@ ax.pie(
     radius = 1.2,
     colors = colors
 )
-ax.set_title("Ratio of problems per algorithm")
+# ax.set_title("Ratio of problems per algorithm")
 
 # ✅ 레이아웃 조정 (중요)
 fig.tight_layout()

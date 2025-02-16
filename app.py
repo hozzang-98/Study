@@ -83,9 +83,13 @@ daily_counts = df.groupby('일자').size()
 # 누적 합 계산
 cumulative_counts = daily_counts.cumsum()
 
-# 꺾은선 그래프 시각화
 fig, ax = plt.subplots(figsize=(10, 6))
-ax.plot(cumulative_counts.index, cumulative_counts.values, marker='o', linestyle='-', color='b')
+# 꺾은선 그래프
+ax.plot(cumulative_counts.index, cumulative_counts.values, marker='o', linestyle='-', color='g', label='Cumulative')
+
+# 막대 그래프
+ax.bar(daily_counts.index, daily_counts.values, color='orange', alpha=0.5, label='Daily')
+
 ax.xaxis.set_major_locator(MaxNLocator(integer=True, prune='both', nbins=10))  # 'nbins' 값으로 표시할 레이블 수 조정
 
 # 제목 및 레이블 추가

@@ -9,7 +9,7 @@ def solution(picks, minerals):
     if len(minerals) > max_minerals: # 주어진 광물이 캘 수 있는 광물 수보다 크면
         minerals = minerals[:max_minerals]
         
-    cnt_min = [[0,0,0] for _ in range((len(minerals) //5 +1))] # dia, iron, stone
+    cnt_min = [[0, 0, 0] for _ in range((len(minerals) + 4) // 5)] # dia, iron, stone
     
     for i in range(len(minerals)):
         if minerals[i] == 'diamond': 
@@ -22,20 +22,15 @@ def solution(picks, minerals):
     cnt_min.sort(key=lambda x:(-x[0],-x[1],-x[2]))
     
     #정렬된 광물들을 다이아,철,돌 곡괭이 순서대로 캔다.
-    for i in cnt_min:
-         dia,iron,stone = i
-         for j in range(len(picks)):
-            if picks[j]>0 and j==0:
-                picks[j]-=1
-                answer += dia + iron + stone
-                break
-            elif picks[j]>0 and j==1:
-                picks[j]-=1
-                answer += (5*dia) + iron + stone
-                break
-            elif picks[j]>0 and j==2:
-                picks[j]-=1
-                answer += (25*dia) + (5*iron) + stone
+    fatigue = [[1, 1, 1],        # 다이아 곡괭이
+            [5, 1, 1],        # 철 곡괭이
+            [25, 5, 1]]     # 돌 곡괭이
+										
+    for dia, iron, stone in cnt_min:
+        for i in range(3):
+            if picks[i] > 0:
+                picks[i] -= 1
+                answer += dia * fatigue[i][0] + iron * fatigue[i][1] + stone * fatigue[i][2]
                 break
         
     return answer

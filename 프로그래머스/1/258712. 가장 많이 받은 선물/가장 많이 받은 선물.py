@@ -1,38 +1,27 @@
-from collections import defaultdict
-
 def solution(friends, gifts):
-    
-    answer = 0
     n = len(friends)
-    dic = {friend:[0,0] for friend in friends} # give, take
-    gift_idx = [0]*n
-    friends_idx = {friend:idx for idx, friend in enumerate(friends)}
-    
-    table = [[0] * n for _ in range(n)]
-    
-    for gift in gifts:
-        
-        give, take = gift.split()
-        giver_idx, taker_idx = friends_idx[give], friends_idx[take]
-        gift_idx[giver_idx] += 1
-        gift_idx[taker_idx] -= 1
-        table[giver_idx][taker_idx] += 1
+    name_to_idx = {name: i for i, name in enumerate(friends)}
+    gift_score = [0] * n
+    history = [[0] * n for _ in range(n)]
 
-    result = [0] * n
+    # 선물 내역 저장
+    for g in gifts:
+        a, b = g.split()
+        ai, bi = name_to_idx[a], name_to_idx[b]
+        history[ai][bi] += 1
+        gift_score[ai] += 1
+        gift_score[bi] -= 1
+
+    answer = 0
     for i in range(n):
-
+        cnt = 0
         for j in range(n):
-            
-            if i == j: continue
-            
-            diff = table[i][j] - table[j][i]
-            if diff > 0:
-                result[i] += 1
-            
-            elif diff == 0:
-                
-                if gift_idx[i] > gift_idx[j]:
-                    
-                    result[i] += 1
-                    
-    return max(result)
+            if i == j:
+                continue
+            if history[i][j] > history[j][i]:
+                cnt += 1
+            elif history[i][j] == history[j][i] and gift_score[i] > gift_score[j]:
+                cnt += 1
+        answer = max(answer, cnt)
+
+    return answer

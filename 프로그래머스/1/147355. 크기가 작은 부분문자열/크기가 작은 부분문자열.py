@@ -1,11 +1,10 @@
 def solution(t, p):
-    
-    answer = 0
-    tmp_list = []
-    
-    idx = 0
-    for i in range(len(t)-len(p)+1):
-        
-        tmp_list.append(int(''.join(t[i:i+len(p)])))
+    p_len = len(p)
+    p_int = int(p)
+    count = 0
 
-    return len([i for tmp in tmp_list if tmp <= int(p)]) 
+    for i in range(len(t) - p_len + 1):
+        if int(t[i:i+p_len]) <= p_int:
+            count += 1
+
+    return count

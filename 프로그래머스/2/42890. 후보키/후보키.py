@@ -1,31 +1,31 @@
 from itertools import combinations
 
 def solution(relation):
-    answer = []
-    
     n_cols = len(relation[0])
     n_rows = len(relation)
-    
-    # i개 짜리 조합 생성
-    for i in range(1, n_cols+1):
-        
-        # 조합 인덱스 생성
-        for combination in combinations(range(n_cols), i):
-            
-            tmp = [tuple([row[idx] for idx in combination]) for row in relation]
-            
-            if len(set(tmp)) < n_rows: continue
-            
-            flag = True
-            
-            for candidate in answer:
-                
-                if set(candidate).issubset(set(combination)):
-                    
-                    flag = False
+    candidates = []
+
+    for i in range(1, n_cols + 1):
+        for comb in combinations(range(n_cols), i):
+
+            # 유일성 빠르게 체크
+            seen = set()
+            is_unique = True
+            for row in relation:
+                key = tuple(row[idx] for idx in comb)
+                if key in seen:
+                    is_unique = False
                     break
-                    
-            if flag == True: answer.append(combination)
-            
-    
-    return len(answer)
+                seen.add(key)
+
+            if not is_unique:
+                continue
+
+            # 최소성 검사
+            comb_set = set(comb)
+            if any(prev.issubset(comb_set) for prev in candidates):
+                continue
+
+            candidates.append(frozenset(comb))  # 불변 set으로 저장
+
+    return len(candidates)

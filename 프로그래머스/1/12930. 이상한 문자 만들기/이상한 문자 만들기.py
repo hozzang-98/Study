@@ -1,12 +1,11 @@
 def solution(s):
-    answer = ''
-    s_list = s.split(' ')
-    for li in s_list:
-        for idx, c in enumerate(li):
-            if idx % 2 == 0:
-                answer += c.upper()
-            else:
-                answer += c.lower()
-        answer += ' '
+    result = []
+    words = s.split(' ')
+    
+    for word in words:
+        temp = ''
+        for i, c in enumerate(word):
+            temp += c.upper() if i % 2 == 0 else c.lower()
+        result.append(temp)
 
-    return answer[:-1]
+    return ' '.join(result)

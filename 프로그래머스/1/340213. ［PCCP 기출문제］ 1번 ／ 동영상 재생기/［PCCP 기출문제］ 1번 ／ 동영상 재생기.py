@@ -1,10 +1,6 @@
 def time_change(hhmm):
-    
-    mins ,secs = hhmm.split(':')
-    
-    s = int(mins) * 60 + int(secs)
-    
-    return s
+    mins, secs = map(int, hhmm.split(':'))
+    return mins * 60 + secs
 
 def in_opening(pos, op_start, op_end):
     
@@ -36,9 +32,6 @@ def solution(video_len, pos, op_start, op_end, commands):
         elif pos >= video_len: pos = video_len
         
         pos = in_opening(pos, op_start, op_end)
-        
-        
-
         
     m = str(pos // 60) if len(str(pos // 60)) == 2 else '0' + str(pos // 60)
     s = str(pos % 60) if len(str(pos % 60)) == 2 else '0' + str(pos % 60)

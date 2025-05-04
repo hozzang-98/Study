@@ -19,7 +19,9 @@ def solution(picks, minerals):
         else : 
             cnt_min[i//5][2] += 1
     
+    print(cnt_min)
     cnt_min.sort(key=lambda x:(-x[0],-x[1],-x[2]))
+    print(cnt_min)
     
     #정렬된 광물들을 다이아,철,돌 곡괭이 순서대로 캔다.
     fatigue = [[1, 1, 1],        # 다이아 곡괭이

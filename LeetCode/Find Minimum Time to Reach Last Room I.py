@@ -1,5 +1,5 @@
 class Solution:
-    def minTimeToReach(self, moveTime: List[List[int]]) -> int:
+    def minTimeToReach(self, moveTime: list[list[int]]) -> int:
         import heapq
 
         n, m = len(moveTime), len(moveTime[0])

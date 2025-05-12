@@ -1,0 +1,19 @@
+WITH COMPARE_TABLE as (
+SELECT 
+    S.ID, 
+    S.Name, 
+    F.Friend_ID, 
+    P_SELF.Salary as SELF_SALARY, 
+    P_FRIEND.Salary as FRIEND_SALARY,
+    CASE WHEN P_FRIEND.Salary > P_SELF.Salary THEN 'O'
+         ELSE 'X'
+         END AS 'FRIEND_HIGH'
+FROM Students S
+INNER JOIN Friends F ON S.ID = F.ID
+INNER JOIN Packages P_SELF ON S.ID = P_SELF.ID
+INNER JOIN Packages P_FRIEND ON F.Friend_ID = P_FRIEND.ID)
+
+SELECT Name
+FROM COMPARE_TABLE
+WHERE FRIEND_HIGH = 'O'
+ORDER BY FRIEND_SALARY asc

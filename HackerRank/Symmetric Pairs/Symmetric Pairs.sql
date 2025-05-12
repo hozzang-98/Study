@@ -1,0 +1,14 @@
+SELECT X, Y
+FROM Functions
+WHERE X = Y
+GROUP BY X, Y
+HAVING COUNT(*) = 2
+
+UNION
+
+SELECT Distinct T1.X, T1.Y
+FROM Functions T1
+INNER JOIN Functions T2
+ON T1.X = T2.Y and T1.Y = T2.X 
+WHERE T1.X < T1.Y
+ORDER BY X asc, Y asc

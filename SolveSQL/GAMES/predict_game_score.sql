@@ -54,7 +54,7 @@ WHERE
   )
   and T1.year >= 2015;
 
-# 다른 풀이
+--- 다른 풀이
 
   WITH genre_avg AS (
   SELECT
